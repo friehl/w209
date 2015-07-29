@@ -4,8 +4,34 @@ include mixins/header
 block content
   mixin header
   .container
-    h1= title
-    p Welcome to #{title}
-    p By #{name}
-    svg.chart
+    h1 Football Injuries
+    h3 By a group in DS209
+    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam tellus. Suspendisse viverra odio ut dolor rhoncus convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget tellus odio. Maecenas sed felis tempus, vehicula ipsum eu, lobortis purus. Curabitur fermentum neque sed elementum porttitor. Nunc sit amet ornare nunc. Etiam ornare interdum feugiat. In eu purus placerat, iaculis odio ut, malesuada lectus. Nam quis nisl sed quam sodales cursus. Proin placerat mollis gravida. Nam non nulla tincidunt risus consectetur accumsan rhoncus ut risus. Donec in nunc molestie, aliquam tortor in, pretium erat.
+    
+    .col-md-8
+      #fdrgraph
+    .col-md-4
+      #injurycount
+        form(name="count-percent")
+          label Percent
+          input(type="radio", name="mode", id="percent", value="bypercent", checked)
+          label Count  
+          input(type="radio", name="mode", id="count", value="bycount") 
+        
+      #injurytype
+        form(name="injury")
+          label Questionable
+          input(type="radio", name="mode", id="questionable", value="questionable", checked)
+          label Probable
+          input(type="radio", name="mode", id="probable", value="probable")
+            
+    .row
+    .col-md-12      
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam tellus. Suspendisse viverra odio ut dolor rhoncus convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget tellus odio. Maecenas sed felis tempus, vehicula ipsum eu, lobortis purus. Curabitur fermentum neque sed elementum porttitor. Nunc sit amet ornare nunc. Etiam ornare interdum feugiat. In eu purus placerat, iaculis odio ut, malesuada lectus. Nam quis nisl sed quam sodales cursus. Proin placerat mollis gravida. Nam non nulla tincidunt risus consectetur accumsan rhoncus ut risus. Donec in nunc molestie, aliquam tortor in, pretium erat.       
+      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam tellus. Suspendisse viverra odio ut dolor rhoncus convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget tellus odio. Maecenas sed felis tempus, vehicula ipsum eu, lobortis purus. Curabitur fermentum neque sed elementum porttitor. Nunc sit amet ornare nunc. Etiam ornare interdum feugiat. In eu purus placerat, iaculis odio ut, malesuada lectus. Nam quis nisl sed quam sodales cursus. Proin placerat mollis gravida. Nam non nulla tincidunt risus consectetur accumsan rhoncus ut risus. Donec in nunc molestie, aliquam tortor in, pretium erat.
+    #Mikigraph
+      h3#miki Football Injuries by Severity
+        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='Dashboard 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Section3Viz&#47;Dashboard2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Section3Viz&#47;Dashboard2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Section3Viz&#47;Dashboard2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+           
+      
     

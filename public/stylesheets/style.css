@@ -7,12 +7,53 @@ a {
   color: #00B7FF;
 }
 
-.chart rect {
-  fill: steelblue;
+rect.bordered {
+	stroke: #E6E6E6;
+	stroke-width: 2px;
+		}
+
+body {
+	font-size: 9pt;
+	font-family: Consolas, courier;
+  }
+
+text.axis {
+		fill: #000;
+	}
+
+.axis path,
+.axis line {
+	fill: none;
+	stroke: #000;
+			shape-rendering: crispEdges;
+		}
+
+.x.axis path {
+	display: none;
+	}
+
+.legend line {
+	stroke: #000;
+	shape-rendering: crispEdges;
+  }
+
+form {
+	position: relative;
+	float: left;
+	padding: 0px;
+	margin: 0px;
 }
 
-.chart text {
-  fill: white;
-  font: 10px sans-serif;
-  text-anchor: end;
+label {
+  position: relative;
+  padding: 0px 5px 0px 20px;
+  
+}
+
+svg {
+  float: left;
+}
+
+#miki {
+  text-align: center;
 }

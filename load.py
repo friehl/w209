@@ -19,7 +19,8 @@ class PGCreator():
             np.dtype('O'): "VARCHAR",
             np.dtype('int64'): "INT",
             np.dtype('float64'): "DECIMAL",
-            np.dtype('datetime64'): "DATE"
+            np.dtype('datetime64'): "DATE",
+            np.dtype('bool'): "BOOLEAN"
         }
 
 
@@ -48,6 +49,7 @@ class PGCreator():
                     col = col.replace(char, '')
             col = col.replace(' ', '_').lower()
             col = col.replace('-', '_')
+            col = col.replace('%', '_perc')
             col_headers.append(col)
         return zip(col_headers, pg_dtypes)
 
@@ -98,8 +100,8 @@ class PGCreator():
 
 
 def main():
-    fname = 'raw_data.csv'
-    tablename = 'football.test'
+    fname = 'Injury Duration_UniqueInjuries.csv'
+    tablename = 'football.injury_duration_unique'
     fpath = os.path.join(DATA_DIR, fname)
     pgcreate = PGCreator(fpath, tablename)
     print("Creating Table")

@@ -17,7 +17,7 @@ router.get('/graph', function(req, res, next) {
 router.get('/api', function(req, res) {
   var results = [];
   pg.connect(connectionString, function(err, client, done) {
-    var query = client.query("SELECT count(*) - 1 as count_1 from test;");
+    var query = client.query("select team, status, played, count(*) from football.raw_data group by 1, 2, 3;");
     query.on('row', function(row) {
       results.push(row);
     });
