@@ -4,34 +4,156 @@ include mixins/header
 block content
   mixin header
   .container
-    h1 Football Injuries
-    h3 By a group in DS209
-    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam tellus. Suspendisse viverra odio ut dolor rhoncus convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget tellus odio. Maecenas sed felis tempus, vehicula ipsum eu, lobortis purus. Curabitur fermentum neque sed elementum porttitor. Nunc sit amet ornare nunc. Etiam ornare interdum feugiat. In eu purus placerat, iaculis odio ut, malesuada lectus. Nam quis nisl sed quam sodales cursus. Proin placerat mollis gravida. Nam non nulla tincidunt risus consectetur accumsan rhoncus ut risus. Donec in nunc molestie, aliquam tortor in, pretium erat.
+    h1 The Story of Injuries in the NFL
+    h3.header(style="font-style: italic") as told by weekly injury reports
+    
+    h3 Introduction
+    
+    p We hear all the time that, in football, ‘injuries are a part of the game.’ But injuries are more than a small facet of the game. In many cases, they determine the fate of entire seasons or franchises. Football fans have a general sense that football is dangerous, but rarely do commentators go into much detail about how or to whom football does the most damage. 
+    p Our goal in this article is to do just that: using weekly injury report data, we’ll explore the role injuries play in the modern NFL. We’ll start by taking a look into how teams use the weekly injury report. Next, we’ll investigate which players get injured, how they get injured, the severity of those injuries, and even suggest a few factors that may influence injuries. Finally, we’ll flip over to the financial side of the question, analyzing which positions cost their teams the most in forgone salary due to injuries.
+    p For detailed information on the data, see the appendix at the end of this page.
+    
+    h3 Section 1: How Teams Lie
+    
+    p Every week each NFL team releases its weekly injury report, which is scrutinized by opposing teams, fans, and bookmakers. The injury designation provides the likelihood a player will play in the next game. A ‘probable’ designation means there is high chance the player will play; a ‘questionable’ designation means there is a 50% chance a player will play and a ‘doubtful’ means there is a 25% chance a player will play.
+    p So why lie? By not being truthful about an injury report, teams can give their opponent false information. For example, look at the number of players that are on the Patriots ‘questionable’ and ‘probably’ injury list (see graph below). The Patriots put players on the injury list that are not injured in order to provide misinformation to opponents. Can you find any other teams that abuse the injury list?
     
     .col-md-8
       #fdrgraph
     .col-md-4
-      #injurycount
+      #filters
         form(name="count-percent")
-          label Percent
-          input(type="radio", name="mode", id="percent", value="bypercent", checked)
-          label Count  
-          input(type="radio", name="mode", id="count", value="bycount") 
+          label Count
+          input(type="radio", name="mode", id="count", value="bycount", checked)
+          label Percent  
+          input(type="radio", name="mode", id="percent", value="bypercent") 
         
-      #injurytype
         form(name="injury")
           label Questionable
           input(type="radio", name="mode", id="questionable", value="questionable", checked)
+          label Doubtful
+          input(type="radio", name="mode", id="doubtful", value="doubtful")
           label Probable
           input(type="radio", name="mode", id="probable", value="probable")
+      
+      .row
+      #sortbutton
+        input.btn.btn-default(type='button', value='sort', name="sortbutton")
             
     .row
     .col-md-12      
-      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam tellus. Suspendisse viverra odio ut dolor rhoncus convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget tellus odio. Maecenas sed felis tempus, vehicula ipsum eu, lobortis purus. Curabitur fermentum neque sed elementum porttitor. Nunc sit amet ornare nunc. Etiam ornare interdum feugiat. In eu purus placerat, iaculis odio ut, malesuada lectus. Nam quis nisl sed quam sodales cursus. Proin placerat mollis gravida. Nam non nulla tincidunt risus consectetur accumsan rhoncus ut risus. Donec in nunc molestie, aliquam tortor in, pretium erat.       
-      p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut aliquam tellus. Suspendisse viverra odio ut dolor rhoncus convallis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque eget tellus odio. Maecenas sed felis tempus, vehicula ipsum eu, lobortis purus. Curabitur fermentum neque sed elementum porttitor. Nunc sit amet ornare nunc. Etiam ornare interdum feugiat. In eu purus placerat, iaculis odio ut, malesuada lectus. Nam quis nisl sed quam sodales cursus. Proin placerat mollis gravida. Nam non nulla tincidunt risus consectetur accumsan rhoncus ut risus. Donec in nunc molestie, aliquam tortor in, pretium erat.
+    
+    h3 Section 2: Injury Frequency and Severity
+    p Next up, we’ll explore the frequency and severity with which players are injured. In the visualization below, you can select a primary factor in the top-left. You can resort the graphs in the upper-right. The graph on the left shows the rate of injuries broken out by the chosen variable; the graph on the right shows the severity of injuries, measured by status on the injury report (Probable, Questionable, Doubtful, or Out). You can also change whether the graph on the right shows the number of weeks of injuries or the percentage of injuries at each injury status. 
+  
     #Mikigraph
       h3#miki Football Injuries by Severity
-        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script><div class='tableauPlaceholder' style='width: 1004px; height: 869px;'><noscript><a href='#'><img alt='Dashboard 2 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Section3Viz&#47;Dashboard2&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz' width='1004' height='869' style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Section3Viz&#47;Dashboard2' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Se&#47;Section3Viz&#47;Dashboard2&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='showVizHome' value='no' /><param name='showTabs' value='y' /><param name='bootstrapWhenNotified' value='true' /></object></div>
+        <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
+        .tableauPlaceholder(style='width: 1004px; height: 869px;')
+            noscript
+              a(href='#')
+              img(alt='Dashboard 2 ', src='https://public.tableau.com/static/images/Se/Section3Viz/Dashboard2/1_rss.png', style='border: none')
+            object.tableauViz(width='1004', height='869', style='display:none;')
+              param(name='host_url', value='https%3A%2F%2Fpublic.tableau.com%2F')
+              param(name='show_viz_home', value='no')
+              param(name='site_root', value='')
+              param(name='name', value='Section3Viz/Dashboard2')
+              param(name='tabs', value='no')
+              param(name='toolbar', value='yes')
+              param(name='static_image', value='https://public.tableau.com/static/images/Se/Section3Viz/Dashboard2/1.png')
+              param(name='animate_transition', value='yes')
+              param(name='display_static_image', value='yes')
+              param(name='display_spinner', value='yes')
+              param(name='display_overlay', value='yes')
+              param(name='display_count', value='yes')
+              param(name='showVizHome', value='no')
+              param(name='showTabs', value='y')
+              param(name='bootstrapWhenNotified', value='true')
+        
+    .col-md-12
+      p Here are four takeaways we noticed in the above graphs.
+      p Lower Body Injuries Rule the Day
+      ul
+        li.p By far the most common injuries are lower-body injuries, such as knee, ankle, and hamstring injuries. Those three injury type alone account for 37% of all injuries! Sorting by injury severity as a percentage, we can see that they’re not only common but they all tend to be pretty severe too, appearing in the bottom half of injury types in percentage of occurrences listed as probable. Another lower-body injury example is a fibula injury. When a player is listed with a fibula injury, they are listed as “out” in nearly 60% of the weeks. Fibula injuries appear to be the most severe injury, because player are most likely to be listed as “out” and least likely to be listed as “probable.”
+          p
+          p Worse yet, these injuries are likely to become even more common over time. The NFL has instituted rule changes that discourage tackling ‘high’, since doing so leads to concussions. However, tackling ‘low’ leads to more lower body injuries. As our data shows, the league’s incentives to minimize concussions may not square with the players’ incentives to avoid lower body injuries. Defensive players have even told stories of offensive players “approaching them before games and pleading to be hit high rather than low” because they’d rather suffer a concussion, which keeps them out of a few games at worst, than a debilitating knee or ankle injury which might end their season or career.
+      p Teams Play Games with the Injury Report
+      ul
+        li.p The team dropdown shows how differently teams use the injury report. For instance, the New England Patriots are famous for manipulating the injury report for strategic advantages. You can see one way they do so in the chart. They’ve had 970 player-weeks of questionable designations, 343 player-weeks more than the second-place Texans. If you’re hurt on the Patriots, you’re almost certainly going to be listed as questionable, which makes it hard for opposing teams to gameplan for who’s actually hurt and who is fine. In the same division, the Jets, meanwhile, list almost 60% of their injuries as probable compared to the Patriots’ 22%.
+      p Speed Kills
+      ul
+        li.p As most fantasy football team owners likely already know, the positions that get tackled the most, running backs and wide receivers, get hurt more than any other position. Another explanation might be that injuries accrue the fastest to the quickest players, since the top three most-injured positions are also the top three fastest positions as measured by average 40-yard-dash times. This is where a lot of those common knee and hamstring injuries happen. Running backs are listed as doubtful or out in nearly 17% of the weeks when they are on the injury list, which is second only to quarterbacks (19%).
+        
+        
+      h3 Section 4: The Hidden Cost
+      p Finally, let’s examine how much all these injuries end up costing the NFL franchises and which positions are driving that cost.  Below is a diagram that shows the sum of the salaries associated with the players injured prorated for the number of weeks they players did not play while on the injury list.  In other words, if I make $1,000,000 a year as an NFL player but I am out with an injury for half the games in a season, my franchise had to pay me $500,000 to sit on the bench.  The injury costs are listed for each position as diagramed on either side of the line of scrimmage and the diagram has choices for specific teams and years as well.  
+      
+      table
+        tr
+          td
+            p(style='font-family:sans-serif') Team
+          td
+            p(style='font-family:sans-serif') Year
+        tr
+          td
+            select#teamcombo
+              option(value='All') All Teams
+              option(value='ARI') ARI
+              option(value='ATL') ATL
+              option(value='BAL') BAL
+              option(value='BUF') BUF
+              option(value='CAR') CAR
+              option(value='CHI') CHI
+              option(value='CIN') CIN
+              option(value='CLE') CLE
+              option(value='DAL') DAL
+              option(value='DEN') DEN
+              option(value='DET') DET
+              option(value='GB') GB
+              option(value='HOU') HOU
+              option(value='IND') IND
+              option(value='JAC') JAC
+              option(value='KC') KC
+              option(value='MIA') MIA
+              option(value='MIN') MIN
+              option(value='NE') NE
+              option(value='NO') NO
+              option(value='NYG') NYG
+              option(value='NYJ') NYJ
+              option(value='OAK') OAK
+              option(value='PHI') PHI
+              option(value='PIT') PIT
+              option(value='SD') SD
+              option(value='SEA') SEA
+              option(value='SF') SF
+              option(value='STL') STL
+              option(value='TB') TB
+              option(value='TEN') TEN
+              option(value='WAS') WAS
+          td
+            select#yearcombo
+              option(value='All') All Years
+              option(value='2009') 2009
+              option(value='2010') 2010
+              option(value='2011') 2011
+              option(value='2012') 2012
+              option(value='2013') 2013
+              option(value='2014') 2014
+      #maindiv
+      #otherElements
+      .row
+      .col-md-12
+        p From the diagram, we can see a few interesting results: 
+        p(style="font-style: italic") The position driving the largest injury costs are Cornerback and Quarterback
+        ul
+          li The cornerback position suffers from one of the highest injuries per player per year, driving the cost up from the volume of injury weeks side of the equation, while quarterbacks are some of the highest paid players on the field, driving the cost up from the salary side of the equation.
+          
+        
+  
+  script(src= '/bower_components/jquery/dist/jquery.min.js')
+  script(src="http://d3js.org/d3.v3.min.js")      
+  script(src='/javascripts/fdrvis.js')
+  script(src='/javascripts/bradvis.js')  
            
       
     

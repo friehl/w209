@@ -3,7 +3,31 @@ include mixins/header
 
 block content
   mixin header
-  .container  
-    .jumbotron
-      h1= title
-      img(src="/images/graph.png")
+  .container
+    .col-md-8
+      #fdrgraph
+    .col-md-4
+      #filters
+        form(name="count-percent")
+          label Percent
+          input(type="radio", name="mode", id="percent", value="bypercent", checked)
+          label Count  
+          input(type="radio", name="mode", id="count", value="bycount") 
+          
+        form(name="injury")
+          label Questionable
+          input(type="radio", name="mode", id="questionable", value="questionable", checked)
+          label Probable
+          input(type="radio", name="mode", id="probable", value="probable")
+        
+      .row
+      #sortbutton
+        input(name="sortbutton", type="button", value="sort", class="btn")
+      button(id='loadRequest') Get New Data    
+      
+      
+  script(src= '/bower_components/jquery/dist/jquery.min.js')    
+  script(src="http://d3js.org/d3.v3.min.js")
+  script(src='/javascripts/pg_test.js')
+      
+    

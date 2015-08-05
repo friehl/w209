@@ -9,6 +9,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Football Injuries', name: 'Fletcher' });
 });
 
+router.get('/about', function(req, res, next) {
+  res.render('about')
+});
+
 router.get('/graph', function(req, res, next) {
   var title = req.param('title', 'Football Salaries')
   res.render('graph', {title: title})
@@ -16,8 +20,10 @@ router.get('/graph', function(req, res, next) {
 
 router.get('/api', function(req, res) {
   var results = [];
+  var min_year = req.query.min_year;
+  var max_year = req.query.max_year;
   pg.connect(connectionString, function(err, client, done) {
-    var query = client.query("select team, status, played, count(*) from football.raw_data group by 1, 2, 3;");
+    var query = client.query("select team, status, played from football.raw_data_2 where year >= " + min_year + "AND year <= " + max_year +";");
     query.on('row', function(row) {
       results.push(row);
     });

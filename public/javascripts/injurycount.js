@@ -34,7 +34,7 @@ svg.append("text")
   .style("text-decoration", "underline")
   .text("Injury Type by Team: ");
 
-d3.csv("../data/raw_data.csv", function(error, csv_data) {
+d3.csv("../data/raw_data_2.csv", function(error, csv_data) {
   if (error) {
     alert(error);
   }
@@ -95,6 +95,7 @@ d3.csv("../data/raw_data.csv", function(error, csv_data) {
 							});
 							// save the total
 							dd[pd].totalresponses = dd[pd].responses[dd[pd].responses.length - 1].y1;
+							dd[pd].percentsort = dd[pd].responses[dd[pd].responses.length - 1].yp0;
 					}
 				}
 				};
@@ -115,9 +116,9 @@ d3.csv("../data/raw_data.csv", function(error, csv_data) {
 			.style("text-anchor", "start");
 
 			// add the y axis
-			svg.append("g")
-				.attr("class", "y axis")
-				.call(yaxis);
+		svg.append("g")
+			.attr("class", "y axis")
+			.call(yaxis);
 
 			// create svg groups ("g") and place them
 		var category = svg.selectAll(".category")
@@ -170,6 +171,8 @@ d3.csv("../data/raw_data.csv", function(error, csv_data) {
 			}
 
 		}
+
+		d3.selectAll("input").on("click", sortFun);
 
 		function transitionInjury(inj) {
 
@@ -266,7 +269,46 @@ d3.csv("../data/raw_data.csv", function(error, csv_data) {
 			yaxis.tickFormat(d3.format(".2s"));
 			svg.selectAll(".y.axis").call(yaxis);
 		}
-	}
+
+		function getInjury() {
+			if (document.getElementById("questionable").checked) {
+				return "Q";
+			}
+			else { return "P"; }
+		};
+
+		function getSort() {
+			if (document.getElementById("percent").checked) {
+				return "percentsort"
+			} else { return "totalresponses"}
+		};
+
+		function sortFun() {
+			if (this.value == 'sort') {
+				var inj = getInjury();
+				var sortType = getSort();
+
+				parsedata.sort(function(a, b) {
+					return b[inj][sortType] - a[inj][sortType];
+				});
+
+				xscale.domain(parsedata.map(function(d) { return d.team; }));
+				svg.selectAll("g .x.axis")
+					.attr("transform", "translate(0," + height + ")")
+					.call(xaxis)
+					.selectAll("text")
+					.attr("y", 5)
+					.attr("x", 7)
+					.attr("dy", ".35em")
+					.attr("transform", "rotate(65)")
+					.style("text-anchor", "start");
+
+  			category.transition()
+      		.duration(750)
+      		.attr("transform", function(d) { return "translate(" + xscale(d.team) + ",0)"; });
+				};
+			}
+		}
 });
 
 d3.select(self.frameElement).style("height", (height + margin.top + margin.bottom) + "px");

@@ -1,10 +1,15 @@
 body {
   padding: 0px 100px ;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px Tahoma, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+h3.header {
+  padding: 0px;
+  margin: 0px;
 }
 
 rect.bordered {
@@ -12,21 +17,17 @@ rect.bordered {
 	stroke-width: 2px;
 		}
 
-body {
-	font-size: 9pt;
-	font-family: Consolas, courier;
-  }
-
 text.axis {
 		fill: #000;
 	}
 
-.axis path,
-.axis line {
-	fill: none;
-	stroke: #000;
-			shape-rendering: crispEdges;
-		}
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+  }
 
 .x.axis path {
 	display: none;
@@ -47,7 +48,17 @@ form {
 label {
   position: relative;
   padding: 0px 5px 0px 20px;
-  
+
+}
+
+#fdrbtn {
+  margin-left: -40px;
+}
+
+#filters {
+  margin-top: 40px;
+  margin-left: -50px;
+  margin-right: 30px;
 }
 
 svg {
@@ -55,5 +66,25 @@ svg {
 }
 
 #miki {
+  text-align: center;
+}
+
+path {
+  stroke: steelblue;
+  stroke-width: 2;
+  fill: none;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.container .text-muted {
+  margin: 20px 0;
   text-align: center;
 }

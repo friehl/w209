@@ -1,0 +1,13 @@
+extends layout
+include mixins/header
+
+block content
+  mixin header
+  .container
+    h1 About the Data
+    p The injury data came from Pro-Football-Reference’s injury pages. An example can be found 
+      a(href="http://www.pro-football-reference.com/teams/min/2014_injuries.htm") here
+      |. Salary and position data came from 
+      a(href="http://www.spotrac.com/") Spotrac
+      |. Data is collected for all games from 2009 to 2014. Players who didn’t play in 3 games in a season were excluded from the second visualization since their injuries were often more serious, long-term injuries. A distinct injury is considered a contiguous block of weeks with the same injury description (ie, “knee”). 
+    p Also, we assume all injuries on the injury report happen in games, as we cannot distinguish between game and non-game injuries in our dataset. Thus, if a player is injured in practice and they show up on the injury report for the following week’s games, they will appear as having been injured by the team that they last played.
