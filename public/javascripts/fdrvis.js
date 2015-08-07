@@ -123,8 +123,9 @@ function loadGraph(data) {
     };
   });
 
+	var inj = getInjury();
   xscale.domain(parsedata.map(function(d) { return d.team; }));
-  yscale.domain([0, d3.max(parsedata, function(d) { return d.Q.totalresponses; })]);
+  yscale.domain([0, d3.max(parsedata, function(d) { return d[inj].totalresponses; })]);
   // add the x axis and rotate its labels
   svg.append("g")
     .attr("class", "x axis")
@@ -151,7 +152,7 @@ function loadGraph(data) {
 
       // draw the rects within the groups
   category.selectAll("rect")
-    .data(function(d) { return d.Q.responses; })
+    .data(function(d) { return d[inj].responses; })
     .enter().append("rect")
     .attr("width", xscale.rangeBand())
     .attr("y", function(d) { return yscale(d.y1); })
