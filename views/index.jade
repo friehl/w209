@@ -36,10 +36,25 @@ block content
           input(type="radio", name="mode", id="doubtful", value="doubtful")
           label Probable
           input(type="radio", name="mode", id="probable", value="probable")
+        
+        form(name="year", id="yearGrp")
+          label 2009
+          input(type="checkbox", name="yeargrp", value=2009, checked)
+          label 2010
+          input(type="checkbox", name="yeargrp", value=2010, checked)
+          label 2011
+          input(type="checkbox", name="yeargrp", value=2011, checked)
+          label 2012
+          input(type="checkbox", name="yeargrp", value=2012, checked)
+          label 2013
+          input(type="checkbox", name="yeargrp", value=2013, checked)
+          label 2014
+          input(type="checkbox", name="yeargrp", value=2014, checked)
       
       .row
       #sortbutton
-        input.btn.btn-default(type='button', value='sort', name="sortbutton")
+        input.btn.btn-default(type='button', value='Sort', name="sortbutton")
+        input.btn.btn-default(type='button', value='Update Year', id="updateYear" name="updateyear")  
             
     .row
     .col-md-8  

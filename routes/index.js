@@ -20,10 +20,9 @@ router.get('/graph', function(req, res, next) {
 
 router.get('/api', function(req, res) {
   var results = [];
-  var min_year = req.query.min_year;
-  var max_year = req.query.max_year;
+  var years = req.query.years;
   pg.connect(connectionString, function(err, client, done) {
-    var query = client.query("select team, status, played from football.raw_data_2 where year >= " + min_year + "AND year <= " + max_year +";");
+    var query = client.query("select team, status, played from football.raw_data_2 where year IN ("+ years.join(',') +");");
     query.on('row', function(row) {
       results.push(row);
     });

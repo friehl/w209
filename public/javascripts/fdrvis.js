@@ -36,15 +36,20 @@ svg.append("text")
 
 $(function() {
   $(document).ready(function() {
-    $.get('/api', {min_year: 2009, max_year: 2012}, function(res) {
+    $.get('/api', {years: [2009, 2010, 2011, 2012, 2013, 2014]}, function(res) {
       loadGraph(res);
     });
   });
 });
 
 $(function() {
-  $('#loadRequest').click(function() {
-    $.get('/api', {min_year: 2010, max_year: 2010}, function(res) {
+  $('#updateYear').click(function() {
+		var years = [];
+		$(':checkbox:checked').each(function(i) {
+      years[i] = $(this).val();
+		});
+		console.log(years)
+    $.get('/api', {years: years}, function(res) {
       loadGraph(res)
       updateGraph();
     });
@@ -58,7 +63,7 @@ var parsedata = [];
 function loadGraph(data) {
   //Create an object for each team;
   svg.selectAll(".category").remove();
-  //svg.selectAll(".x.axis").remove();
+  svg.selectAll(".x.axis").remove();
   svg.selectAll(".y.axis").remove();
   parsedata = d3.nest()
     .key(function(d) { return d.team; })
@@ -263,9 +268,11 @@ function transitionCount() {
   // set the yscale domain
   if (document.getElementById("questionable").checked) {
     yscale.domain([0, d3.max(parsedata, function(d) { return d.Q.totalresponses; })]);
-  } else {
+  } else if (document.getElementById("probable").checked) {
     yscale.domain([0, d3.max(parsedata, function(d) { return d.P.totalresponses; })]);
-  }
+  } else {
+		yscale.domain([0, d3.max(parsedata, function(d) { return d.D.totalresponses; })]);
+	}
 
   // create the transition
   var transone = svg.transition()
@@ -309,7 +316,7 @@ function getSort() {
 
 function sortFun() {
   var category = svg.selectAll('.category');
-  if (this.value == 'sort') {
+  if (this.value == 'Sort') {
     var inj = getInjury();
     var sortType = getSort();
 
