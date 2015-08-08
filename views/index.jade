@@ -30,12 +30,12 @@ block content
           input(type="radio", name="mode", id="percent", value="bypercent") 
         
         form(name="injury")
+          label Probable
+          input(type="radio", name="mode", id="probable", value="probable")
           label Questionable
           input(type="radio", name="mode", id="questionable", value="questionable", checked)
           label Doubtful
           input(type="radio", name="mode", id="doubtful", value="doubtful")
-          label Probable
-          input(type="radio", name="mode", id="probable", value="probable")
         
         form(name="year", id="yearGrp")
           label 2009
@@ -87,22 +87,28 @@ block content
               param(name='bootstrapWhenNotified', value='true')
         
     .col-md-8
-      p Here are four takeaways we noticed in the above graphs.
+      p Here are three takeaways we noticed in the above graphs.
       p(style="font-style: italic") Lower Body Injuries Rule the Day
       ul
         li.p By far the most common injuries are lower-body injuries, such as knee, ankle, and hamstring injuries. Those three injury type alone account for 37% of all injuries! Sorting by injury severity as a percentage, we can see that they’re not only common but they all tend to be pretty severe too, appearing in the bottom half of injury types in percentage of occurrences listed as probable. Another lower-body injury example is a fibula injury. When a player is listed with a fibula injury, they are listed as “out” in nearly 60% of the weeks. Fibula injuries appear to be the most severe injury, because player are most likely to be listed as “out” and least likely to be listed as “probable.”
           p
-          p Worse yet, these injuries are likely to become even more common over time. The NFL has instituted rule changes that discourage tackling ‘high’, since doing so leads to concussions. However, tackling ‘low’ leads to more lower body injuries. As our data shows, the league’s incentives to minimize concussions may not square with the players’ incentives to avoid lower body injuries. Defensive players have even told stories of offensive players “approaching them before games and pleading to be hit high rather than low” because they’d rather suffer a concussion, which keeps them out of a few games at worst, than a debilitating knee or ankle injury which might end their season or career.
+          p Worse yet, these injuries are likely to become even more common over time. The NFL has instituted rule changes that discourage tackling ‘high’, since doing so leads to concussions. However, tackling ‘low’ leads to more lower body injuries. As our data shows, the league’s incentives to minimize concussions may not square with the players’ incentives to avoid lower body injuries. Defensive players have even 
+            a(href="http://espn.go.com/espn/otl/story/_/id/11466663/nfl-players-grudgingly-adjust-new-tackling-rules-avoid-head-injuries") told stories
+            |  of offensive players “approaching them before games and pleading to be hit high rather than low” because they’d rather suffer a concussion, which keeps them out of a few games at worst, than a debilitating knee or ankle injury which might end their season or career.
       p(style="font-style: italic") Teams Play Games with the Injury Report
       ul
-        li.p The team dropdown shows how differently teams use the injury report. For instance, the New England Patriots are famous for manipulating the injury report for strategic advantages. You can see one way they do so in the chart. They’ve had 970 player-weeks of questionable designations, 343 player-weeks more than the second-place Texans. If you’re hurt on the Patriots, you’re almost certainly going to be listed as questionable, which makes it hard for opposing teams to gameplan for who’s actually hurt and who is fine. In the same division, the Jets, meanwhile, list almost 60% of their injuries as probable compared to the Patriots’ 22%.
+        li.p The team dropdown shows how differently teams use the injury report. For instance, the New England Patriots are famous for manipulating the injury report for 
+          a(href="http://profootballtalk.nbcsports.com/2014/03/19/spikes-talib-say-patriots-file-false-injury-reports/") strategic advantages. 
+          | You can see one way they do so in the chart. They’ve had 970 player-weeks of questionable designations, 343 player-weeks more than the second-place Texans. If you’re hurt on the Patriots, you’re almost certainly going to be listed as questionable, which makes it hard for opposing teams to gameplan for who’s actually hurt and who is fine. In the same division, the Jets, meanwhile, list almost 60% of their injuries as probable compared to the Patriots’ 22%.
       p(style="font-style: italic") Speed Kills
       ul
-        li.p As most fantasy football team owners likely already know, the positions that get tackled the most, running backs and wide receivers, get hurt more than any other position. Another explanation might be that injuries accrue the fastest to the quickest players, since the top three most-injured positions are also the top three fastest positions as measured by average 40-yard-dash times. This is where a lot of those common knee and hamstring injuries happen. Running backs are listed as doubtful or out in nearly 17% of the weeks when they are on the injury list, which is second only to quarterbacks (19%).
+        li.p As most fantasy football team owners likely already know, the positions that get tackled the most, running backs and wide receivers, get hurt more than any other position. Another explanation might be that injuries accrue the fastest to the quickest players, since the four fastest positions as measured by 
+          a(href="https://en.wikipedia.org/wiki/40-yard_dash#Average_time_by_position") average 40-yard-dash times
+          |  are four of the top six most-injured positions. This is where a lot of those common knee and hamstring injuries happen. Running backs are listed as doubtful or out in nearly 17% of the weeks when they are on the injury list, which is second only to quarterbacks (19%).
         
         
       h3 Section 3: The Hidden Cost
-      p Finally, let’s examine how much all these injuries end up costing the NFL franchises and which positions are driving that cost.  Below is a diagram that shows the sum of the salaries associated with the players injured prorated for the number of weeks they players did not play while on the injury list.  In other words, if I make $1,000,000 a year as an NFL player but I am out with an injury for half the games in a season, my franchise had to pay me $500,000 to sit on the bench.  The injury costs are listed for each position as diagramed on either side of the line of scrimmage and the diagram has choices for specific teams and years as well.  
+      p Finally, let’s examine how much all these injuries end up costing the NFL franchises and which positions are driving that cost.  Below is a diagram that shows the sum of the salaries associated with the players injured, prorated for the number of weeks the players did not play while on the injury list.  In other words, if I make $1,000,000 a year as an NFL player but I am out with an injury for half the games in a season, my franchise had to pay me $500,000 to sit on the bench.  The injury costs are listed for each position as diagramed on either side of the line of scrimmage and the diagram has choices for specific teams and years as well.  
       
       table
         tr
