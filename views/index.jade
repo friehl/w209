@@ -14,7 +14,7 @@ block content
       p Our goal in this article is to do just that: using weekly injury report data, we’ll explore the role injuries play in the modern NFL. We’ll start by taking a look into how teams use the weekly injury report. Next, we’ll investigate which players get injured, how they get injured, the severity of those injuries, and even suggest a few factors that may influence injuries. Finally, we’ll flip over to the financial side of the question, analyzing which positions cost their teams the most in forgone salary due to injuries.
       p For detailed information on the data, see the appendix at the end of this page.
     
-      h3 Section 1: How Teams Lie
+      h3 Section 1: How Teams Game the Injury Report
     
       p Every week each NFL team releases its weekly injury report, which is scrutinized by opposing teams, fans, and bookmakers. The injury designation provides the likelihood a player will play in the next game. A ‘probable’ designation means there is high chance the player will play; a ‘questionable’ designation means there is a 50% chance a player will play and a ‘doubtful’ means there is a 25% chance a player will play.
       p So why lie? By not being truthful about an injury report, teams can give their opponent false information. For example, look at the number of players that are on the Patriots ‘questionable’ and ‘probably’ injury list (see graph below). The Patriots put players on the injury list that are not injured in order to provide misinformation to opponents. Can you find any other teams that abuse the injury list?
@@ -58,10 +58,10 @@ block content
             
     .row
     .col-md-8  
-    
       h3 Section 2: Injury Frequency and Severity
       p Next up, we’ll explore the frequency and severity with which players are injured. In the visualization below, you can select a primary factor in the top-left. You can resort the graphs in the upper-right. The graph on the left shows the rate of injuries broken out by the chosen variable; the graph on the right shows the severity of injuries, measured by status on the injury report (Probable, Questionable, Doubtful, or Out). You can also change whether the graph on the right shows the number of weeks of injuries or the percentage of injuries at each injury status. 
       h3#miki Football Injuries by Severity
+    .row
     #Mikigraph
       
         <script type='text/javascript' src='https://public.tableau.com/javascripts/api/viz_v1.js'></script>
@@ -161,10 +161,10 @@ block content
               option(value='2012') 2012
               option(value='2013') 2013
               option(value='2014') 2014
-    #maindiv
-    .row
-    #otherElements
-    .row
+      #maindiv
+      .row
+      #otherElements
+      .row
     .col-md-8
       p From the diagram, we can see a few interesting results: 
       p(style="font-style: italic") The position driving the largest injury costs are Cornerback and Quarterback
@@ -180,7 +180,7 @@ block content
           
         
   
-  script(src= '/bower_components/jquery/dist/jquery.min.js')
+  script(src='/bower_components/jquery/dist/jquery.min.js')
   script(src="http://d3js.org/d3.v3.min.js")      
   script(src='/javascripts/fdrvis.js')
   script(src='/javascripts/bradvis.js')  
