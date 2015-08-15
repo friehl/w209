@@ -12,16 +12,19 @@ block content
     
       p We hear all the time that, in football, ‘injuries are a part of the game.’ But injuries are more than a small facet of the game. In many cases, they determine the fate of entire seasons or franchises. Football fans have a general sense that football is dangerous, but rarely do commentators go into much detail about how or to whom football does the most damage. 
       p Our goal in this article is to do just that: using weekly injury report data, we’ll explore the role injuries play in the modern NFL. We’ll start by taking a look into how teams use the weekly injury report. Next, we’ll investigate which players get injured, how they get injured, the severity of those injuries, and even suggest a few factors that may influence injuries. Finally, we’ll flip over to the financial side of the question, analyzing which positions cost their teams the most in forgone salary due to injuries.
-      p For detailed information on the data, see the appendix at the end of this page.
+      p For detailed information on the data, see the About the Data tab at the top of this page.
     
       h3 Section 1: How Teams Game the Injury Report
     
       p Every week each NFL team releases its weekly injury report, which is scrutinized by opposing teams, fans, and bookmakers. The injury designation provides the likelihood a player will play in the next game. A ‘probable’ designation means there is high chance the player will play; a ‘questionable’ designation means there is a 50% chance a player will play and a ‘doubtful’ means there is a 25% chance a player will play.
-      p So why lie? By not being truthful about an injury report, teams can give their opponent false information. For example, look at the number of players that are on the Patriots ‘questionable’ and ‘probably’ injury list (see graph below). The Patriots put players on the injury list that are not injured in order to provide misinformation to opponents. Can you find any other teams that abuse the injury list?
+      p So why lie? By not being truthful about an injury report, teams can give their opponent false information. For example, look at the number of players that are on the Patriots and Eagles ‘questionable’ injury list (see graph below). Both the Patriots and the Eagles have similar percentage of players on the ‘questionable’ injury list who play, but the patriots have 4x the number of players on the list. Can you find any other teams that abuse the injury list?
     
     .col-md-8
       #fdrgraph
     .col-md-4
+      #toggle
+        div(style="font-weight: bold") Toggles & Filters 
+        div (use these to change the graph!)
       #filters
         form(name="count-percent")
           label Count
@@ -170,11 +173,11 @@ block content
       p(style="font-style: italic") The position driving the largest injury costs are Cornerback and Quarterback
       ul
         li The cornerback position suffers from one of the highest injuries per player per year, driving the cost up from the volume of injury weeks side of the equation, while quarterbacks are some of the highest paid players on the field, driving the cost up from the salary side of the equation.
-      p Injury costs have risen over this six-year timeframe
+      p(style="font-style: italic") Injury costs have risen over this six-year timeframe
       ul
         li Looking at the injury cost data across all teams from 2009 to 2014, the trend has been for those costs to increase.
         
-      p Teams that have higher reported injuries do not necessarily have higher injury costs when measured by lost playing time
+      p(style="font-style: italic") Teams that have higher reported injuries do not necessarily have higher injury costs when measured by lost playing time
       ul
         li In the section above, we can see that Houston has the highest probability of a reported injury per game and Kansas City has the lowest, however, both teams have very similar total cost of injury over the 6 year period.  This lends further credence to the theory that reported injuries do not always lead to players actually not play in games.  
           

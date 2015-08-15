@@ -1,21 +1,30 @@
-// Initialize parameters
-        var curr_year_val = "All"
+var curr_year_val = "All"
         var curr_team_val = "All"
-        var transform_count, myCostLabel, myCostLabel2, masterdata, currYearData,
-            elem, gradient, maxCost, currentData, currSum, lineChartElem = 0
+        var transform_count, myCostLabel, myCostLabel2, masterdata, currYearData, barChartElem,
+            elem, gradient, maxCost, currentData, currSum, lineChartElem, currTeamData = 0
 
-        // Set size for position circles
+        // Set parameters for position circles
         var widtha = 800,
-            heighta = 600;
+            heighta = 500;
 
         // Set parameters for line chart
-        var linechart_margin = {top: 30, right: 20, bottom: 50, left: 60},
-        width_linechart = 500 - linechart_margin.left - linechart_margin.right,
+        var linechart_margin = {top: 30, right: 20, bottom: 50, left: 50},
+        width_linechart = 450 - linechart_margin.left - linechart_margin.right,
         height_linechart = 200 - linechart_margin.top - linechart_margin.bottom;
+
+        // Set parameters for bar chart
+        var barchart_margin = {top: 30, right: 20, bottom: 50, left: 50},
+        width_barchart = 450 - barchart_margin.left - barchart_margin.right,
+        height_barchart = 200 - barchart_margin.top - barchart_margin.bottom;
 
         // Set the ranges
         var x_line = d3.scale.linear().range([0,width_linechart]);
         var y_line = d3.scale.linear().range([height_linechart, 0]);
+
+        // Set the bar scale
+        var x_bar_scale = d3.scale.ordinal().rangeRoundBands([0, width_barchart], .1);
+        var y_bar_scale = d3.scale.linear().rangeRound([height_barchart, 0]);
+
 
         var svg_position = d3.select("#maindiv")
             .append("svg")
@@ -23,13 +32,21 @@
             .attr("width", widtha)
             .attr("height", heighta)
 
-        var svg_linechart = d3.select("#otherElements")
+        var svg_linechart = d3.select("#maindiv")
             .append("svg")
             .attr("id", "linechart") // just for clarity sake; not needed
             .attr("width", width_linechart+linechart_margin.left+linechart_margin.right)
             .attr("height", height_linechart+linechart_margin.top+linechart_margin.bottom)
             .append("g")
             .attr("transform", "translate(" + linechart_margin.left + "," + linechart_margin.top + ")");
+
+        var svg_barchart = d3.select("#maindiv")
+            .append("svg")
+            .attr("id", "barchart") // just for clarity sake; not needed
+            .attr("width", width_barchart+barchart_margin.left+barchart_margin.right)
+            .attr("height", height_barchart+barchart_margin.top+barchart_margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + barchart_margin.left + "," + barchart_margin.top + ")");
 
 
         // Define the axes for line chart
@@ -48,11 +65,21 @@
             .orient("left")
             .ticks(5);
 
+        // Define the axes for the bar chart
+        var x_bar_axis = d3.svg.axis().scale(x_bar_scale)
+            .orient("bottom");
+        var y_bar_axis = d3.svg.axis().scale(y_bar_scale)
+            .tickFormat(function (d) {
+                var prefix = d3.formatPrefix(d);
+                return "$" + prefix.scale(d) + prefix.symbol;
+            })
+        .orient("left")
+        .ticks(4);
+
         // Define the line
         var valueline = d3.svg.line()
             .x(function(d) { return x_line(d.year); })
             .y(function(d) { return y_line(d.weekcost_raw); });
-
 
         function formatDollarAmount(inputAmt){
             // Function takes a dollar amount and returns it as $###.#[B...M...K]
@@ -77,6 +104,7 @@
             curr_year_val = d3.select(this).property('value')
             drawData()
             drawLineChart()
+            drawBarChart()
         }
 
         d3.select("#teamcombo").on("change", changeteam)
@@ -84,6 +112,7 @@
             curr_team_val = d3.select(this).property('value')
             drawData()
             drawLineChart()
+            drawBarChart()
         }
 
         // Draw initial diagram
@@ -93,13 +122,16 @@
         // Draw line chart
         displayLineChart()
 
+        // Draw bar chart()
+        displayBarChart()
+
         function displayOtherElements(){
             // Place the other diagram elements for the position diagram
             var scrimmageLine = svg_position.append("svg:line")
                 .attr("x1", 150)
-                .attr("y1", 320)
+                .attr("y1", 260)
                 .attr("x2", 800)
-                .attr("y2", 320 )
+                .attr("y2", 260 )
                 .style("stroke", "rgb(6,120,155)")
                 .style("stroke-width", 8);
 
@@ -113,7 +145,7 @@
 
             var offenseLabel = svg_position.append("text")
                 .attr("dx", 20)
-                .attr("dy", 425)
+                .attr("dy", 360)
                 .text("Offense")
                 .attr("font-family", "sans-serif")
                 .attr("font-size", "24px")
@@ -139,7 +171,7 @@
 
         function displayData(){
             // load position and cost data
-            d3.json("https://gist.githubusercontent.com/bjmcminn/11a239830ab6d898d2cc/raw/75065a1c3158472a0c17c8249c55d2bde71b9301/pos_circles.json", function(json) {
+            d3.json("https://gist.githubusercontent.com/bjmcminn/11a239830ab6d898d2cc/raw/3f81d6665a945e51fb2e59abdce77ab68c292e30/pos_circles.json", function(json) {
 
                 /* Define the data for the position circles */
                 currentdata = json
@@ -152,7 +184,7 @@
 
         function displayLineChart() {
             // Get the data
-            d3.json("https://gist.githubusercontent.com/bjmcminn/0e743f6995f5193159b6/raw/06d692c763c60561262bd107cdfabcfe7cee50e3/year_data.json", function(json) {
+            d3.json("https://gist.githubusercontent.com/bjmcminn/0e743f6995f5193159b6/raw/35549e14048420b1b3ebd1677694876b608d7984/year_data.json", function(json) {
 
                 currYearData = json
                 lineChartElem = svg_linechart.selectAll("g")
@@ -164,17 +196,32 @@
 
         }
 
+        function displayBarChart() {
+            // Get the data
+            d3.json("https://gist.githubusercontent.com/bjmcminn/0e743f6995f5193159b6/raw/35549e14048420b1b3ebd1677694876b608d7984/year_data.json", function(json) {
+
+                currTeamData = json
+                barChartElem = svg_barchart.selectAll("g")
+                    .data(json.nodes)
+                    .enter()
+
+                drawBarChart()
+            });
+
+        }
+
         function drawLineChart(){
             // Draw the line chart showing the sum of cost by year
 
             var transform_duration = 300
+            var totcost_label = ""
 
             // Filter to the current view (for team)
             filteredYearData = currYearData.nodes
-                .filter(function(d) { return d.team == curr_team_val})
+                .filter(function(d) { return d.team == curr_team_val && d.year!= "All"})
 
             // Debug
-            console.log(filteredYearData)
+            // console.log(filteredYearData)
 
             svg_linechart.selectAll("path.costline").remove()
             svg_linechart.selectAll("g.xaxis").remove()
@@ -208,6 +255,12 @@
                 .style("text-anchor", "middle")
                 .text("Year");
 
+            if (curr_team_val == "All"){
+                totcost_label = "All Teams"
+            }
+            else{
+                totcost_label = curr_team_val
+            }
 
             // Add the Y Axis
             svg_linechart.append("g")
@@ -219,8 +272,8 @@
                 .attr("x", 0)
                 .attr("dy", "-1em")
                 .attr("font-size", "14px")
-                .style("text-anchor", "middle")
-                .text("Total Cost");
+                .style("text-anchor", "left")
+                .text("Total Cost: " + totcost_label);
 
             // Set color of vertical year indicator
             var vertLineColor = "#b22222"
@@ -240,9 +293,91 @@
                 .attr('class','vertline')
                 .attr('height', height_linechart)
                 .attr("x", (width_linechart / 5)*(curr_year_val-2009))
-                .attr('width', 2)
+                .attr('width', 4)
                 .attr("fill",vertLineColor)
                 .attr('opacity',1);
+
+        }
+
+        function drawBarChart(){
+            // Draw the bar chart showing the sum of cost by team
+
+            var transform_duration = 300
+            var totcost_label = ""
+
+            svg_barchart.selectAll("g.x_axis").remove()
+            svg_barchart.selectAll("g.y_axis").remove()
+            svg_barchart.selectAll("rect.bars").remove()
+
+            filteredTeamData = currTeamData.nodes
+                .filter(function(d) { return d.year == curr_year_val && d.team != "All"})
+
+            // Debug
+            // console.log(filteredTeamData)
+
+            filteredTeamData.sort(function (a, b) {return +b.weekcost_raw - +a.weekcost_raw;});
+
+            x_bar_scale.domain(filteredTeamData.map(function(d) { return d.team; }));
+            // x_bar_scale.domain(filteredTeamData.sort(function (d) { return d3.ascending(+d.weekcost_raw);}).map(function(d) { return d.team; })).copy();
+            y_bar_scale.domain([0, d3.max(filteredTeamData, function(d) { return +d.weekcost_raw; })]);
+
+            svg_barchart.append("g")
+                .attr("class", "x_axis")
+                .attr("transform", "translate(0," + height_barchart + ")")
+                .call(x_bar_axis)
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .attr("dx", "-.4em")
+                .attr("dy", "-.20em")
+                .attr("font-size", "10px")
+                .attr("transform", "rotate(-65)" );
+
+            svg_barchart.append("text")
+                .attr("class", "xlabel")
+                .style("text-anchor", "middle")
+                .attr("font-size", "14px")
+                .attr("x", width_barchart / 2)
+                .attr("y", height_barchart + barchart_margin.bottom-5)
+                .text("Team");
+
+            if (curr_year_val == "All"){
+                totcost_label = "All Years"
+            }
+            else{
+                totcost_label = curr_year_val
+            }
+
+            svg_barchart.append("g")
+                .attr("class", "y_axis")
+                .call(y_bar_axis)
+                .append("text")
+                .attr("transform", "rotate(0)")
+                .attr("y", 6)
+                .attr("x", 0)
+                .attr("dy", "-1em")
+                .attr("font-size", "14px")
+                .style("text-anchor", "left")
+                .text("Total Cost: " + totcost_label);
+
+            svg_barchart.selectAll("bar")
+                .data(filteredTeamData)
+                .enter().append("rect")
+                .attr("class", "bars")
+                .attr("x", function(d) { return x_bar_scale(d.team); })
+                .attr("width", x_bar_scale.rangeBand())
+                .attr("y", function(d) { return y_bar_scale(+d.weekcost_raw); })
+                .attr("fill","steelblue")
+                .attr("height", function(d) { return height_barchart - y_bar_scale(+d.weekcost_raw); });
+
+            svg_barchart.selectAll("rect")
+                .filter(function(d) { return d.team === curr_team_val; })
+                .classed("currentTeam", true)
+                .attr("fill", "#b22222")
+                .transition().duration(transform_duration)
+                .style("opacity", 0)
+                .transition().duration(transform_duration)
+                .style("opacity", 1);
+
 
         }
 
@@ -275,7 +410,7 @@
             var sumTextLabel = svg_position.append("svg:text")
                 .attr("class","sumTextLabel")
                 .attr("dx", 450)
-                .attr("dy", 100)
+                .attr("dy", 80)
                 .text("Total Cost:")
                 .attr("font-family", "sans-serif")
                 .attr("font-size", "16px")
@@ -284,7 +419,7 @@
             var sumTextValue = svg_position.append("svg:text")
                 .attr("class","sumTextValue")
                 .attr("dx", 450)
-                .attr("dy", 120)
+                .attr("dy", 100)
                 .text(currSum)
                 .attr("font-family", "sans-serif")
                 .attr("font-size", "18px")

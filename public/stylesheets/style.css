@@ -59,8 +59,13 @@ label {
   margin: 5px;
 }
 
+#toggle {
+  margin-left: -60px;
+  margin-right: 30px;
+}
+
 #filters {
-  margin-top: 40px;
+  margin-top: 0px;
   margin-left: -60px;
   margin-right: 30px;
 }
