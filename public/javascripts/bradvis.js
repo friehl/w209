@@ -8,12 +8,12 @@ var curr_year_val = "All"
             heighta = 500;
 
         // Set parameters for line chart
-        var linechart_margin = {top: 30, right: 20, bottom: 50, left: 50},
+        var linechart_margin = {top: 30, right: 20, bottom: 50, left: 55},
         width_linechart = 450 - linechart_margin.left - linechart_margin.right,
         height_linechart = 200 - linechart_margin.top - linechart_margin.bottom;
 
         // Set parameters for bar chart
-        var barchart_margin = {top: 30, right: 20, bottom: 50, left: 50},
+        var barchart_margin = {top: 30, right: 20, bottom: 50, left: 55},
         width_barchart = 450 - barchart_margin.left - barchart_margin.right,
         height_barchart = 200 - barchart_margin.top - barchart_margin.bottom;
 
