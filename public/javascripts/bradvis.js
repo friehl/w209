@@ -1,4 +1,5 @@
-var curr_year_val = "All"
+// Initialize parameters
+        var curr_year_val = "All"
         var curr_team_val = "All"
         var transform_count, myCostLabel, myCostLabel2, masterdata, currYearData, barChartElem,
             elem, gradient, maxCost, currentData, currSum, lineChartElem, currTeamData = 0
@@ -8,12 +9,12 @@ var curr_year_val = "All"
             heighta = 500;
 
         // Set parameters for line chart
-        var linechart_margin = {top: 30, right: 20, bottom: 50, left: 55},
+        var linechart_margin = {top: 30, right: 20, bottom: 50, left: 50},
         width_linechart = 450 - linechart_margin.left - linechart_margin.right,
         height_linechart = 200 - linechart_margin.top - linechart_margin.bottom;
 
         // Set parameters for bar chart
-        var barchart_margin = {top: 30, right: 20, bottom: 50, left: 55},
+        var barchart_margin = {top: 30, right: 20, bottom: 50, left: 50},
         width_barchart = 450 - barchart_margin.left - barchart_margin.right,
         height_barchart = 200 - barchart_margin.top - barchart_margin.bottom;
 
@@ -105,6 +106,7 @@ var curr_year_val = "All"
             drawData()
             drawLineChart()
             drawBarChart()
+            displayTitle()
         }
 
         d3.select("#teamcombo").on("change", changeteam)
@@ -113,11 +115,14 @@ var curr_year_val = "All"
             drawData()
             drawLineChart()
             drawBarChart()
+            displayTitle()
         }
+
 
         // Draw initial diagram
         displayData()
         displayOtherElements()
+        displayTitle()
 
         // Draw line chart
         displayLineChart()
@@ -159,14 +164,38 @@ var curr_year_val = "All"
                 .attr("font-size", "30px")
                 .attr("text-anchor", "middle");
 
+        }
+
+        function displayTitle(){
+
+            // Remove the old title
+            svg_position.selectAll("text.titletext").remove()
+
+            // Set the new title text value
+            var titletext = ""
+            if(curr_year_val == "All"){
+                titletext = "2009-2014"
+            }
+            else {
+                titletext = curr_year_val
+            }
+
+            if(curr_team_val == "All"){
+                titletext += " - All Teams"
+            }
+            else {
+                titletext += " - " + curr_team_val
+            }
+
+            // Display the new title text
             var titleText = svg_position.append("svg:text")
                 .attr("dx", 450)
                 .attr("dy", 50)
-                .text("2009-2014")
+                .text(titletext)
+                .attr("class", "titletext")
                 .attr("font-family", "sans-serif")
                 .attr("font-size", "16px")
                 .attr("text-anchor", "middle");
-
         }
 
         function displayData(){
