@@ -32,7 +32,7 @@ svg.append("text")
   .attr("text-anchor", "middle")
 	.attr("font-family", "sans-serif")
 	.attr("font-size", "24px")
-  .text("Injury Type by Team: ");
+  .text("Injury Count by Team: ");
 
 $(function() {
   $(document).ready(function() {
